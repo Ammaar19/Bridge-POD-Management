@@ -459,7 +459,7 @@ export function CreatePod({ user, onBack, onCreatePod }: CreatePodProps) {
                   <Label htmlFor="startDate">Start Date *</Label>
                   <Input
                     id="startDate"
-                    type="datetime-local"
+                    type="date"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
                     className={errors.startDate ? "border-red-500" : ""}
@@ -474,7 +474,7 @@ export function CreatePod({ user, onBack, onCreatePod }: CreatePodProps) {
                   <Label htmlFor="endDate">End Date *</Label>
                   <Input
                     id="endDate"
-                    type="datetime-local"
+                    type="date"
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
                     className={errors.endDate ? "border-red-500" : ""}
@@ -564,7 +564,7 @@ export function CreatePod({ user, onBack, onCreatePod }: CreatePodProps) {
                   <Label htmlFor="memberStartDate">Member Start Date *</Label>
                   <Input
                     id="memberStartDate"
-                    type="datetime-local"
+                    type="date"
                     value={memberStartDate}
                     onChange={(e) => setMemberStartDate(e.target.value)}
                   />
@@ -573,7 +573,7 @@ export function CreatePod({ user, onBack, onCreatePod }: CreatePodProps) {
                   <Label htmlFor="memberEndDate">Member End Date *</Label>
                   <Input
                     id="memberEndDate"
-                    type="datetime-local"
+                    type="date"
                     value={memberEndDate}
                     onChange={(e) => setMemberEndDate(e.target.value)}
                   />
@@ -663,7 +663,7 @@ export function CreatePod({ user, onBack, onCreatePod }: CreatePodProps) {
                                     Start Date
                                   </Label>
                                   <Input
-                                    type="datetime-local"
+                                    type="date"
                                     value={member.startDate}
                                     onChange={(e) =>
                                       handleUpdateMember(
@@ -680,7 +680,7 @@ export function CreatePod({ user, onBack, onCreatePod }: CreatePodProps) {
                                     End Date
                                   </Label>
                                   <Input
-                                    type="datetime-local"
+                                    type="date"
                                     value={member.endDate}
                                     onChange={(e) =>
                                       handleUpdateMember(

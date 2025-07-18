@@ -264,17 +264,41 @@ const validCredentials = [
   { email: "mona@company.com", password: "frontend123", name: "Mona Singh", role: "employee" as const },
 ];
 
+// Add these helper functions at the top (after imports)
+function saveAuthToStorage(isAuthenticated: boolean, user: any) {
+  localStorage.setItem('isAuthenticated', JSON.stringify(isAuthenticated));
+  localStorage.setItem('user', JSON.stringify(user));
+}
+
+function loadAuthFromStorage() {
+  let isAuthenticated = false;
+  let user = null;
+  try {
+    isAuthenticated = JSON.parse(localStorage.getItem('isAuthenticated') || 'false');
+  } catch { isAuthenticated = false; }
+  try {
+    user = JSON.parse(localStorage.getItem('user') || 'null');
+  } catch { user = null; }
+  return { isAuthenticated: !!isAuthenticated, user: user || null };
+}
+
 export default function App() {
+  // Load from localStorage on first render
+  const authFromStorage = loadAuthFromStorage();
   const [currentView, setCurrentView] = useState<
     "dashboard" | "pod-detail" | "create-pod" | "profile"
   >("dashboard");
-  const [selectedPodId, setSelectedPodId] = useState<
-    string | null
-  >(null);
-  const [user, setUser] = useState(mockUser);
+  const [selectedPodId, setSelectedPodId] = useState<string | null>(null);
+  const [user, setUser] = useState(authFromStorage.user ? authFromStorage.user : mockUser);
+  // Only use mockPods for pods state initialization
   const [pods, setPods] = useState(mockPods);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(!!authFromStorage.isAuthenticated);
   const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Save auth state to localStorage whenever it changes
+  useEffect(() => {
+    saveAuthToStorage(isAuthenticated, user);
+  }, [isAuthenticated, user]);
 
   // Apply dark mode class to document root
   useEffect(() => {
@@ -328,8 +352,12 @@ export default function App() {
     setIsAuthenticated(false);
     setCurrentView("dashboard");
     setSelectedPodId(null);
+    setUser(mockUser); // Reset user to default
     // Reset to light mode on logout
     setIsDarkMode(false);
+    // Remove from localStorage
+    localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('user');
     
     toast.success('Successfully logged out', {
       description: 'You have been logged out of Bridge. Please login again to continue.',
@@ -362,6 +390,7 @@ export default function App() {
               role: credentials.role,
             });
             setIsAuthenticated(true);
+            // saveAuthToStorage will be called by useEffect
             return true;
           }
           return false;

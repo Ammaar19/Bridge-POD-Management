@@ -282,6 +282,20 @@ function loadAuthFromStorage() {
   return { isAuthenticated: !!isAuthenticated, user: user || null };
 }
 
+function savePodsToStorage(pods: any[]) {
+  localStorage.setItem('pods', JSON.stringify(pods));
+}
+
+function loadPodsFromStorage() {
+  try {
+    const pods = JSON.parse(localStorage.getItem('pods') || 'null');
+    if (Array.isArray(pods)) return pods;
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 export default function App() {
   // Load from localStorage on first render
   const authFromStorage = loadAuthFromStorage();
@@ -290,8 +304,9 @@ export default function App() {
   >("dashboard");
   const [selectedPodId, setSelectedPodId] = useState<string | null>(null);
   const [user, setUser] = useState(authFromStorage.user ? authFromStorage.user : mockUser);
-  // Only use mockPods for pods state initialization
-  const [pods, setPods] = useState(mockPods);
+  // Load pods from localStorage if present, else use mockPods
+  const podsFromStorage = loadPodsFromStorage();
+  const [pods, setPods] = useState(podsFromStorage || mockPods);
   const [isAuthenticated, setIsAuthenticated] = useState(!!authFromStorage.isAuthenticated);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -299,6 +314,11 @@ export default function App() {
   useEffect(() => {
     saveAuthToStorage(isAuthenticated, user);
   }, [isAuthenticated, user]);
+
+  // Save pods to localStorage whenever they change
+  useEffect(() => {
+    savePodsToStorage(pods);
+  }, [pods]);
 
   // Apply dark mode class to document root
   useEffect(() => {

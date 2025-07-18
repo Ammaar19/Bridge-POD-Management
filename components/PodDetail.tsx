@@ -203,20 +203,23 @@ export function PodDetail({ pod, user, onBack, onUpdate }: PodDetailProps) {
     // If this is a new handoff link (not updating existing), send Slack notification
     if (!isUpdatingExistingLink) {
       try {
-        const response = await fetch('http://localhost:8000/api/v1/notifications/submit', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            pod: pod,
-            currentMemberId: memberId,
-            handoffLink: link
-          })
-        });
+        const response = await fetch(
+          "http://localhost:8000/api/v1/notifications/submit",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              pod: pod,
+              currentMemberId: memberId,
+              handoffLink: link,
+            }),
+          }
+        );
 
         const result = await response.json();
-        
+
         if (result.success) {
           const nextMember = getNextMember();
           if (nextMember) {
@@ -237,7 +240,7 @@ export function PodDetail({ pod, user, onBack, onUpdate }: PodDetailProps) {
           });
         }
       } catch (error) {
-        console.error('Error sending Slack notification:', error);
+        console.error("Error sending Slack notification:", error);
         toast.error("Failed to send Slack notification", {
           description: "Network error occurred while sending notification.",
           duration: 5000,

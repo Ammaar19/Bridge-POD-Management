@@ -187,7 +187,7 @@ export function PodDetail({ pod, user, onBack, onUpdate }: PodDetailProps) {
     return null;
   };
 
-  const handleUpdateLink = (memberId: string, link: string) => {
+  const handleUpdateLink = async (memberId: string, link: string) => {
     const member = pod.members.find((m) => m.id === memberId);
     const isUpdatingExistingLink =
       member?.handoffLink && member.handoffLink.trim() !== "";
@@ -200,25 +200,55 @@ export function PodDetail({ pod, user, onBack, onUpdate }: PodDetailProps) {
     setEditingMember(null);
     setEditingLink("");
 
-    // Show appropriate toast notification
-    if (isUpdatingExistingLink) {
+    // If this is a new handoff link (not updating existing), send Slack notification
+    if (!isUpdatingExistingLink) {
+      try {
+        const response = await fetch('http://localhost:8000/api/v1/notifications/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            pod: pod,
+            currentMemberId: memberId,
+            handoffLink: link
+          })
+        });
+
+        const result = await response.json();
+        
+        if (result.success) {
+          const nextMember = getNextMember();
+          if (nextMember) {
+            toast.success(`Notification sent to ${nextMember.name} on Slack`, {
+              description: `${nextMember.name} has been notified that work has been handed off to them.`,
+              duration: 5000,
+            });
+          } else {
+            toast.success("Handoff link submitted successfully", {
+              description: "This was the final stage of the workflow.",
+              duration: 5000,
+            });
+          }
+        } else {
+          toast.error("Failed to send Slack notification", {
+            description: result.message,
+            duration: 5000,
+          });
+        }
+      } catch (error) {
+        console.error('Error sending Slack notification:', error);
+        toast.error("Failed to send Slack notification", {
+          description: "Network error occurred while sending notification.",
+          duration: 5000,
+        });
+      }
+    } else {
+      // Show appropriate toast notification for updating existing link
       toast.success("Handoff link updated successfully", {
         description: "The handoff link has been updated with the new URL.",
         duration: 5000,
       });
-    } else {
-      const nextMember = getNextMember();
-      if (nextMember) {
-        toast.success(`Notification sent to ${nextMember.name} on Slack`, {
-          description: `${nextMember.name} has been notified that work has been handed off to them.`,
-          duration: 5000,
-        });
-      } else {
-        toast.success("Handoff link submitted successfully", {
-          description: "This was the final stage of the workflow.",
-          duration: 5000,
-        });
-      }
     }
   };
 

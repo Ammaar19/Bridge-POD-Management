@@ -420,7 +420,8 @@ export function PodDetail({ pod, user, onBack, onUpdate }: PodDetailProps) {
                   <h1 className="bridge-heading text-3xl">{pod.name}</h1>
                   <div className="flex items-center space-x-3 mt-2 flex-wrap gap-1">
                     <Badge className={getStatusColor(pod.status)}>
-                      {pod.status.charAt(0).toUpperCase() + pod.status.slice(1)}
+                      {pod?.status?.charAt(0)?.toUpperCase() +
+                        pod?.status?.slice(1)}
                     </Badge>
                     {pod.tag && (
                       <Badge

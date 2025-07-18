@@ -31,7 +31,7 @@ const WORKFLOW_STAGES = [
   "Product",
   "Design",
   "Frontend",
-  "Backend", 
+  "Backend",
   "QA",
   "Go live",
 ];
@@ -44,7 +44,7 @@ interface Task {
   assignedTo: string; // member ID
   assignedBy: string; // who created the task
   createdAt: string;
-  status: 'pending' | 'in-progress' | 'completed';
+  status: "pending" | "in-progress" | "completed";
   link?: string;
   completedAt?: string;
 }
@@ -62,7 +62,8 @@ const mockPods = [
   {
     id: "1",
     name: "Mobile App Redesign",
-    description: "Complete redesign of our mobile application with new user interface and improved user experience",
+    description:
+      "Complete redesign of our mobile application with new user interface and improved user experience",
     owner: "John Doe",
     tag: "Feature" as "Feature" | "Go-Live",
     createdAt: "2025-01-10T09:00:00Z",
@@ -70,94 +71,100 @@ const mockPods = [
     endDate: "2025-01-24T17:00:00Z",
     currentStage: 2, // Currently at Frontend stage (0-indexed)
     members: [
-      { 
-        id: "1", 
-        name: "Dhruv", 
-        role: "Product", 
-        taskDescription: "Create comprehensive PRD and user stories for the mobile app redesign",
+      {
+        id: "1",
+        name: "Dhruv",
+        role: "Product",
+        taskDescription:
+          "Create comprehensive PRD and user stories for the mobile app redesign",
         startDate: "2025-01-10T09:00:00Z",
         endDate: "2025-01-12T17:00:00Z",
-        handoffLink: "https://notion.so/prd-mobile-redesign", 
+        handoffLink: "https://notion.so/prd-mobile-redesign",
         completed: true,
         workStartedAt: "2025-01-10T09:00:00Z",
         workCompletedAt: "2025-01-12T17:00:00Z",
-        actualTimeSpent: 2
+        actualTimeSpent: 2,
       },
-      { 
-        id: "2", 
-        name: "Ayush", 
-        role: "Design", 
-        taskDescription: "Design new UI/UX mockups and create interactive prototypes",
+      {
+        id: "2",
+        name: "Ayush",
+        role: "Design",
+        taskDescription:
+          "Design new UI/UX mockups and create interactive prototypes",
         startDate: "2025-01-12T17:00:00Z",
         endDate: "2025-01-15T16:00:00Z",
-        handoffLink: "https://figma.com/mobile-app-designs", 
+        handoffLink: "https://figma.com/mobile-app-designs",
         completed: true,
         workStartedAt: "2025-01-12T17:00:00Z",
         workCompletedAt: "2025-01-15T16:00:00Z",
-        actualTimeSpent: 3
+        actualTimeSpent: 3,
       },
-      { 
-        id: "3", 
-        name: "Mona", 
-        role: "Frontend", 
-        taskDescription: "Implement frontend components and integrate with backend APIs",
+      {
+        id: "3",
+        name: "Mona",
+        role: "Frontend",
+        taskDescription:
+          "Implement frontend components and integrate with backend APIs",
         startDate: "2025-01-15T16:00:00Z",
         endDate: "2025-01-22T17:00:00Z",
-        handoffLink: "", 
+        handoffLink: "",
         completed: false,
         workStartedAt: "2025-01-15T16:00:00Z",
         workCompletedAt: null,
-        actualTimeSpent: 0
+        actualTimeSpent: 0,
       },
-      { 
-        id: "4", 
-        name: "Hansal", 
-        role: "Backend", 
+      {
+        id: "4",
+        name: "Hansal",
+        role: "Backend",
         taskDescription: "Backend API development and database optimization",
         startDate: "2025-01-15T16:00:00Z",
         endDate: "2025-01-22T17:00:00Z",
-        handoffLink: "", 
+        handoffLink: "",
         completed: false,
         workStartedAt: null,
         workCompletedAt: null,
-        actualTimeSpent: 0
+        actualTimeSpent: 0,
       },
-      { 
-        id: "5", 
-        name: "Ammaar", 
-        role: "QA", 
-        taskDescription: "Comprehensive testing including functional, performance, and usability testing",
+      {
+        id: "5",
+        name: "Ammaar",
+        role: "QA",
+        taskDescription:
+          "Comprehensive testing including functional, performance, and usability testing",
         startDate: "2025-01-22T17:00:00Z",
         endDate: "2025-01-24T17:00:00Z",
-        handoffLink: "", 
+        handoffLink: "",
         completed: false,
         workStartedAt: null,
         workCompletedAt: null,
-        actualTimeSpent: 0
-      }
+        actualTimeSpent: 0,
+      },
     ],
     tasks: [
       {
         id: "task-1",
         title: "User Research Analysis",
-        description: "Analyze current user research data and identify key pain points",
+        description:
+          "Analyze current user research data and identify key pain points",
         assignedTo: "1", // Dhruv
         assignedBy: "1", // John Doe
         createdAt: "2025-01-10T10:00:00Z",
         status: "completed" as const,
         link: "https://docs.google.com/document/user-research-analysis",
-        completedAt: "2025-01-11T15:00:00Z"
+        completedAt: "2025-01-11T15:00:00Z",
       },
       {
         id: "task-2",
         title: "Design System Documentation",
-        description: "Create comprehensive design system documentation for the new UI components",
+        description:
+          "Create comprehensive design system documentation for the new UI components",
         assignedTo: "2", // Ayush
         assignedBy: "1", // John Doe
         createdAt: "2025-01-12T09:00:00Z",
         status: "completed" as const,
         link: "https://www.figma.com/design-system-docs",
-        completedAt: "2025-01-14T12:00:00Z"
+        completedAt: "2025-01-14T12:00:00Z",
       },
       {
         id: "task-3",
@@ -166,16 +173,17 @@ const mockPods = [
         assignedTo: "4", // Hansal
         assignedBy: "1", // John Doe
         createdAt: "2025-01-16T11:00:00Z",
-        status: "in-progress" as const
-      }
+        status: "in-progress" as const,
+      },
     ],
     status: "in-progress" as "planning" | "in-progress" | "completed",
-    workflowOrder: ["Product", "Design", "Frontend", "Backend", "QA"]
+    workflowOrder: ["Product", "Design", "Frontend", "Backend", "QA"],
   },
   {
     id: "2",
     name: "Payment Gateway Integration",
-    description: "Integration of new payment gateway to support multiple payment methods and improve transaction success rate",
+    description:
+      "Integration of new payment gateway to support multiple payment methods and improve transaction success rate",
     owner: "Sarah Johnson",
     tag: "Go-Live" as "Feature" | "Go-Live",
     createdAt: "2025-01-15T10:30:00Z",
@@ -183,45 +191,47 @@ const mockPods = [
     endDate: "2025-01-25T17:00:00Z",
     currentStage: 1, // Currently at Backend stage
     members: [
-      { 
-        id: "6", 
-        name: "Sarah", 
-        role: "Product", 
-        taskDescription: "Define payment flow requirements and create technical specifications",
+      {
+        id: "6",
+        name: "Sarah",
+        role: "Product",
+        taskDescription:
+          "Define payment flow requirements and create technical specifications",
         startDate: "2025-01-15T10:30:00Z",
         endDate: "2025-01-17T14:30:00Z",
-        handoffLink: "https://notion.so/payment-prd", 
+        handoffLink: "https://notion.so/payment-prd",
         completed: true,
         workStartedAt: "2025-01-15T10:30:00Z",
         workCompletedAt: "2025-01-17T14:30:00Z",
-        actualTimeSpent: 2
+        actualTimeSpent: 2,
       },
-      { 
-        id: "7", 
-        name: "Alex", 
-        role: "Backend", 
-        taskDescription: "Implement payment gateway APIs and handle transaction processing",
+      {
+        id: "7",
+        name: "Alex",
+        role: "Backend",
+        taskDescription:
+          "Implement payment gateway APIs and handle transaction processing",
         startDate: "2025-01-17T14:30:00Z",
         endDate: "2025-01-23T17:00:00Z",
-        handoffLink: "", 
+        handoffLink: "",
         completed: false,
         workStartedAt: "2025-01-17T14:30:00Z",
         workCompletedAt: null,
-        actualTimeSpent: 0
+        actualTimeSpent: 0,
       },
-      { 
-        id: "8", 
-        name: "Maya", 
-        role: "QA", 
+      {
+        id: "8",
+        name: "Maya",
+        role: "QA",
         taskDescription: "Test payment flows and ensure security compliance",
         startDate: "2025-01-23T17:00:00Z",
         endDate: "2025-01-25T17:00:00Z",
-        handoffLink: "", 
+        handoffLink: "",
         completed: false,
         workStartedAt: null,
         workCompletedAt: null,
-        actualTimeSpent: 0
-      }
+        actualTimeSpent: 0,
+      },
     ],
     tasks: [
       {
@@ -233,62 +243,93 @@ const mockPods = [
         createdAt: "2025-01-15T11:00:00Z",
         status: "completed" as const,
         link: "https://docs.google.com/spreadsheet/payment-gateway-comparison",
-        completedAt: "2025-01-16T16:00:00Z"
-      }
+        completedAt: "2025-01-16T16:00:00Z",
+      },
     ],
     status: "in-progress",
-    workflowOrder: ["Product", "Backend", "QA"]
-  }
+    workflowOrder: ["Product", "Backend", "QA"],
+  },
 ];
 
 // Mock Slack notification function
 const sendSlackNotification = (
   memberName: string,
   podName: string,
-  handoffLink: string,
+  handoffLink: string
 ) => {
   console.log(`🔔 Slack Notification Sent:`);
   console.log(`To: ${memberName}`);
   console.log(
-    `Message: You have been handed off work for "${podName}". Please check: ${handoffLink}`,
+    `Message: You have been handed off work for "${podName}". Please check: ${handoffLink}`
   );
   console.log(`Timer started for ${memberName}'s work phase.`);
 };
 
 // Mock employees for login validation
 const validCredentials = [
-  { email: "john@company.com", password: "admin123", name: "John Doe", role: "admin" as const },
-  { email: "sarah@company.com", password: "employee123", name: "Sarah Johnson", role: "employee" as const },
-  { email: "dhruv@company.com", password: "product123", name: "Dhruv Patel", role: "employee" as const },
-  { email: "ayush@company.com", password: "design123", name: "Ayush Kumar", role: "employee" as const },
-  { email: "mona@company.com", password: "frontend123", name: "Mona Singh", role: "employee" as const },
+  {
+    email: "john@company.com",
+    password: "admin123",
+    name: "John Doe",
+    role: "admin" as const,
+  },
+  {
+    email: "sarah@company.com",
+    password: "employee123",
+    name: "Sarah Johnson",
+    role: "employee" as const,
+  },
+  {
+    email: "dhruv@company.com",
+    password: "product123",
+    name: "Dhruv Patel",
+    role: "employee" as const,
+  },
+  {
+    email: "ayush@company.com",
+    password: "design123",
+    name: "Ayush Kumar",
+    role: "employee" as const,
+  },
+  {
+    email: "mona@company.com",
+    password: "frontend123",
+    name: "Mona Singh",
+    role: "employee" as const,
+  },
 ];
 
 // Add these helper functions at the top (after imports)
 function saveAuthToStorage(isAuthenticated: boolean, user: any) {
-  localStorage.setItem('isAuthenticated', JSON.stringify(isAuthenticated));
-  localStorage.setItem('user', JSON.stringify(user));
+  localStorage.setItem("isAuthenticated", JSON.stringify(isAuthenticated));
+  localStorage.setItem("user", JSON.stringify(user));
 }
 
 function loadAuthFromStorage() {
   let isAuthenticated = false;
   let user = null;
   try {
-    isAuthenticated = JSON.parse(localStorage.getItem('isAuthenticated') || 'false');
-  } catch { isAuthenticated = false; }
+    isAuthenticated = JSON.parse(
+      localStorage.getItem("isAuthenticated") || "false"
+    );
+  } catch {
+    isAuthenticated = false;
+  }
   try {
-    user = JSON.parse(localStorage.getItem('user') || 'null');
-  } catch { user = null; }
+    user = JSON.parse(localStorage.getItem("user") || "null");
+  } catch {
+    user = null;
+  }
   return { isAuthenticated: !!isAuthenticated, user: user || null };
 }
 
 function savePodsToStorage(pods: any[]) {
-  localStorage.setItem('pods', JSON.stringify(pods));
+  localStorage.setItem("pods", JSON.stringify(pods));
 }
 
 function loadPodsFromStorage() {
   try {
-    const pods = JSON.parse(localStorage.getItem('pods') || 'null');
+    const pods = JSON.parse(localStorage.getItem("pods") || "null");
     if (Array.isArray(pods)) return pods;
     return null;
   } catch {
@@ -303,11 +344,15 @@ export default function App() {
     "dashboard" | "pod-detail" | "create-pod" | "profile"
   >("dashboard");
   const [selectedPodId, setSelectedPodId] = useState<string | null>(null);
-  const [user, setUser] = useState(authFromStorage.user ? authFromStorage.user : mockUser);
+  const [user, setUser] = useState(
+    authFromStorage.user ? authFromStorage.user : mockUser
+  );
   // Load pods from localStorage if present, else use mockPods
   const podsFromStorage = loadPodsFromStorage();
   const [pods, setPods] = useState(podsFromStorage || mockPods);
-  const [isAuthenticated, setIsAuthenticated] = useState(!!authFromStorage.isAuthenticated);
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    !!authFromStorage.isAuthenticated
+  );
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   // Save auth state to localStorage whenever it changes
@@ -323,9 +368,9 @@ export default function App() {
   // Apply dark mode class to document root
   useEffect(() => {
     if (isDarkMode) {
-      document.documentElement.classList.add('dark');
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.remove("dark");
     }
   }, [isDarkMode]);
 
@@ -335,32 +380,27 @@ export default function App() {
       setPods((currentPods) =>
         currentPods.map((pod) => {
           const currentMember = pod.members.find(
-            (member, index) =>
-              index === pod.currentStage && !member.completed,
+            (member, index) => index === pod.currentStage && !member.completed
           );
 
           if (currentMember && currentMember.workStartedAt) {
             const now = new Date();
-            const startTime = new Date(
-              currentMember.workStartedAt,
-            );
+            const startTime = new Date(currentMember.workStartedAt);
             const hoursWorked =
-              (now.getTime() - startTime.getTime()) /
-              (1000 * 60 * 60);
-            const daysWorked =
-              Math.round((hoursWorked / 24) * 10) / 10; // Round to 1 decimal
+              (now.getTime() - startTime.getTime()) / (1000 * 60 * 60);
+            const daysWorked = Math.round((hoursWorked / 24) * 10) / 10; // Round to 1 decimal
 
             return {
               ...pod,
               members: pod.members.map((member) =>
                 member.id === currentMember.id
                   ? { ...member, actualTimeSpent: daysWorked }
-                  : member,
+                  : member
               ),
             };
           }
           return pod;
-        }),
+        })
       );
     }, 60000); // Update every minute
 
@@ -376,11 +416,12 @@ export default function App() {
     // Reset to light mode on logout
     setIsDarkMode(false);
     // Remove from localStorage
-    localStorage.removeItem('isAuthenticated');
-    localStorage.removeItem('user');
-    
-    toast.success('Successfully logged out', {
-      description: 'You have been logged out of Bridge. Please login again to continue.',
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("user");
+
+    toast.success("Successfully logged out", {
+      description:
+        "You have been logged out of Bridge. Please login again to continue.",
       duration: 5000,
     });
   };
@@ -388,19 +429,21 @@ export default function App() {
   // Handle dark mode toggle
   const handleDarkModeToggle = (enabled: boolean) => {
     setIsDarkMode(enabled);
-    
-    toast.success(enabled ? 'Dark mode enabled' : 'Light mode enabled', {
-      description: `The interface has been switched to ${enabled ? 'dark' : 'light'} mode.`,
+
+    toast.success(enabled ? "Dark mode enabled" : "Light mode enabled", {
+      description: `The interface has been switched to ${
+        enabled ? "dark" : "light"
+      } mode.`,
       duration: 3000,
     });
   };
 
   if (!isAuthenticated) {
     return (
-      <LoginScreen 
+      <LoginScreen
         onLogin={(email, password) => {
           const credentials = validCredentials.find(
-            cred => cred.email === email && cred.password === password
+            (cred) => cred.email === email && cred.password === password
           );
           if (credentials) {
             setUser({
@@ -414,7 +457,7 @@ export default function App() {
             return true;
           }
           return false;
-        }} 
+        }}
         isDarkMode={isDarkMode}
       />
     );
@@ -428,15 +471,18 @@ export default function App() {
   const handleCreatePod = (podData: any) => {
     // Organize members by workflow order, allowing multiple members per role
     const orderedMembers: any[] = [];
-    
+
     podData.workflowOrder.forEach((stage: string) => {
       const stageMembers = podData.members.filter((m: any) => m.role === stage);
       stageMembers.forEach((member: any, index: number) => {
         orderedMembers.push({
           ...member,
-          workStartedAt: stage === podData.workflowOrder[0] && index === 0 ? new Date().toISOString() : null,
+          workStartedAt:
+            stage === podData.workflowOrder[0] && index === 0
+              ? new Date().toISOString()
+              : null,
           workCompletedAt: null,
-          actualTimeSpent: 0
+          actualTimeSpent: 0,
         });
       });
     });
@@ -462,12 +508,12 @@ export default function App() {
   };
 
   const handleDeletePod = (podId: string) => {
-    const podToDelete = pods.find(p => p.id === podId);
-    
-    setPods(pods.filter(pod => pod.id !== podId));
-    
+    const podToDelete = pods.find((p) => p.id === podId);
+
+    setPods(pods.filter((pod) => pod.id !== podId));
+
     // Show success toast
-    toast.success('POD deleted successfully', {
+    toast.success("POD deleted successfully", {
       description: `"${podToDelete?.name}" has been removed from the system.`,
       duration: 5000,
     });
@@ -485,8 +531,7 @@ export default function App() {
         if (pod.id === updatedPod.id) {
           // Check if handoff occurred
           const originalPod = pods.find((p) => p.id === pod.id);
-          const currentMember =
-            originalPod?.members[originalPod.currentStage];
+          const currentMember = originalPod?.members[originalPod.currentStage];
           const updatedCurrentMember =
             updatedPod.members[updatedPod.currentStage];
 
@@ -513,7 +558,7 @@ export default function App() {
               sendSlackNotification(
                 nextMember.name,
                 updatedPod.name,
-                updatedCurrentMember.handoffLink,
+                updatedCurrentMember.handoffLink
               );
             } else {
               // All stages completed
@@ -524,7 +569,7 @@ export default function App() {
           return updatedPod;
         }
         return pod;
-      }),
+      })
     );
   };
 
@@ -542,18 +587,20 @@ export default function App() {
           />
         );
       case "pod-detail":
-        const selectedPod = pods.find(
-          (pod) => pod.id === selectedPodId,
-        );
-        return selectedPod ? (
+        const selectedPod = pods.find((pod) => pod.id === selectedPodId);
+        if (!selectedPod) {
+          // If the pod is not found (e.g., after deletion), go back to dashboard
+          setCurrentView("dashboard");
+          setSelectedPodId(null);
+          return null; // Or a loading spinner if you want
+        }
+        return (
           <PodDetail
             pod={selectedPod}
             user={user}
             onBack={() => setCurrentView("dashboard")}
             onUpdate={handleUpdatePod}
           />
-        ) : (
-          <div>POD not found</div>
         );
       case "create-pod":
         return (
@@ -587,7 +634,13 @@ export default function App() {
   );
 }
 
-function LoginScreen({ onLogin, isDarkMode }: { onLogin: (email: string, password: string) => boolean; isDarkMode: boolean }) {
+function LoginScreen({
+  onLogin,
+  isDarkMode,
+}: {
+  onLogin: (email: string, password: string) => boolean;
+  isDarkMode: boolean;
+}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -631,10 +684,10 @@ function LoginScreen({ onLogin, isDarkMode }: { onLogin: (email: string, passwor
     setIsLoading(true);
 
     // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const success = onLogin(email, password);
-    
+
     if (!success) {
       setError("Invalid email or password. Please try again.");
       setIsLoading(false);
@@ -642,7 +695,11 @@ function LoginScreen({ onLogin, isDarkMode }: { onLogin: (email: string, passwor
   };
 
   return (
-    <div className={`min-h-screen login-container flex items-center justify-center p-4 ${isDarkMode ? 'dark' : ''}`}>
+    <div
+      className={`min-h-screen login-container flex items-center justify-center p-4 ${
+        isDarkMode ? "dark" : ""
+      }`}
+    >
       <div className="w-full max-w-md relative z-10">
         {/* Header */}
         <div className="text-center mb-8">
@@ -650,9 +707,7 @@ function LoginScreen({ onLogin, isDarkMode }: { onLogin: (email: string, passwor
             <div className="w-16 h-16 flex-shrink-0">
               <Bridge />
             </div>
-            <h1 className="bridge-logo text-4xl text-primary">
-              Bridge
-            </h1>
+            <h1 className="bridge-logo text-4xl text-primary">Bridge</h1>
           </div>
           <div className="space-y-2">
             <h2 className="bridge-heading text-2xl text-foreground">
@@ -669,7 +724,9 @@ function LoginScreen({ onLogin, isDarkMode }: { onLogin: (email: string, passwor
           {/* Company indicator */}
           <div className="flex items-center justify-center mb-6 p-3 bg-secondary/50 rounded-lg">
             <Building2 className="h-4 w-4 text-secondary-foreground mr-2" />
-            <span className="text-sm text-secondary-foreground">Company Portal</span>
+            <span className="text-sm text-secondary-foreground">
+              Company Portal
+            </span>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -692,7 +749,11 @@ function LoginScreen({ onLogin, isDarkMode }: { onLogin: (email: string, passwor
                     setError("");
                   }}
                   placeholder="your.email@company.com"
-                  className={`pl-10 h-12 ${emailError ? 'border-destructive focus:border-destructive' : ''}`}
+                  className={`pl-10 h-12 ${
+                    emailError
+                      ? "border-destructive focus:border-destructive"
+                      : ""
+                  }`}
                   disabled={isLoading}
                 />
               </div>
@@ -720,7 +781,11 @@ function LoginScreen({ onLogin, isDarkMode }: { onLogin: (email: string, passwor
                     setError("");
                   }}
                   placeholder="Enter your password"
-                  className={`pl-10 pr-10 h-12 ${passwordError ? 'border-destructive focus:border-destructive' : ''}`}
+                  className={`pl-10 pr-10 h-12 ${
+                    passwordError
+                      ? "border-destructive focus:border-destructive"
+                      : ""
+                  }`}
                   disabled={isLoading}
                 />
                 <button
@@ -749,8 +814,8 @@ function LoginScreen({ onLogin, isDarkMode }: { onLogin: (email: string, passwor
             )}
 
             {/* Submit Button */}
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               className="w-full h-12 bridge-heading text-base"
               disabled={isLoading}
             >
@@ -771,7 +836,9 @@ function LoginScreen({ onLogin, isDarkMode }: { onLogin: (email: string, passwor
           {/* Demo Credentials */}
           <div className="mt-6 pt-6 border-t border-border">
             <div className="text-center">
-              <p className="text-xs text-muted-foreground mb-3">Demo Credentials:</p>
+              <p className="text-xs text-muted-foreground mb-3">
+                Demo Credentials:
+              </p>
               <div className="grid grid-cols-1 gap-2 text-xs">
                 <div className="p-2 bg-muted/50 rounded text-left">
                   <div className="font-medium">Admin:</div>
